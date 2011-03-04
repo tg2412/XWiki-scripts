@@ -1,0 +1,18 @@
+{{html}}<!--Script by cjdelisle-->{{/html}}
+
+{{velocity}}
+
+#set ($orphans = $xwiki.searchDocuments(", BaseObject as xgroup, StringProperty as groupMember where xgroup.name = 
+'XWiki.XWikiAllGroup' and groupMember.id = xgroup.id and groupMember.value = doc.fullName and groupMember.name = 'member' and 
+doc.fullName not in (select doc.fullName from XWikiDocument as doc, BaseObject as user, BaseObject as xgroup, StringProperty as 
+groupMember where user.name = doc.fullName and user.className = 'XWiki.XWikiUsers' and xgroup.className = 'XWiki.XWikiGroups' 
+and xgroup.name != 'XWiki.XWikiAllGroup' and groupMember.id = xgroup.id and groupMember.value = doc.fullName and 
+groupMember.name = 'member')"))
+
+#foreach ($orphan in $orphans)
+
+$orphan ##
+
+#end
+
+{{/velocity}}
